@@ -5,7 +5,7 @@ class App extends React.Component {
     this.state = {
       videos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0]
-    }
+    };
   }
 
   onClick(event) {
@@ -19,7 +19,7 @@ class App extends React.Component {
     }
     // set current song to clicked song index
     this.setState({
-      currentVideo: window.exampleVideoData[index]  
+      currentVideo: window.exampleVideoData[index]
     });
   }
 
@@ -36,8 +36,7 @@ class App extends React.Component {
       </div>
     );
   }
-
-};
+}
 
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
