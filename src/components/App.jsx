@@ -4,29 +4,49 @@ class App extends React.Component {
 
     this.state = {
       videos: window.exampleVideoData,
-      currentVideo: window.exampleVideoData[0]
+      currentVideo: window.exampleVideoData[0], 
+      options: {
+        key: window.YOUTUBE_API_KEY,
+        query: '',
+        max: 5
+      }
     };
   }
 
+  loadYouTubeData(youTubeData) {
+    this.setState({
+      videos: youTubeData, 
+      currentVideo: youTubeData[0]
+    });
+  }
+  
+  componentDidMount() {
+    this.props.searchYouTube(this.state.options, this.loadYouTubeData.bind(this));
+  }
+
   onClick(event) {
-    // grab title
-    // search exampleVideoData for title
     var index;
-    for (var i = 0; i < window.exampleVideoData.length; i++) {
-      if (window.exampleVideoData[i].etag === event.target.id) {
+    // iterate over response.items from searchYoutube
+    for (var i = 0; i < this.state.videos.length; i++) {
+      if (this.state.videos[i].etag === event.target.id) {
         index = i;
       }
     }
     // set current song to clicked song index
     this.setState({
-      currentVideo: window.exampleVideoData[index]
+      currentVideo: this.state.videos[index]
     });
   }
+
+
+  // define click handler for search
+    // this should call searchYoutube with the input query from user
+  // pass this function to Nav!?
 
   render() {
     return (
       <div>
-        <Nav />
+        <Nav searchYouTube={window.searchYouTube}/>
         <div className="col-md-7"> 
           <VideoPlayer video={this.state.currentVideo} />
         </div>
