@@ -6,9 +6,7 @@ class App extends React.Component {
       videos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0], 
       options: {
-        key: window.YOUTUBE_API_KEY,
-        query: '',
-        max: 5
+        query: 'rick and morty',
       }
     };
   }
@@ -26,32 +24,37 @@ class App extends React.Component {
 
   onClick(event) {
     var index;
-    // iterate over response.items from searchYoutube
     for (var i = 0; i < this.state.videos.length; i++) {
       if (this.state.videos[i].etag === event.target.id) {
         index = i;
       }
     }
-    // set current song to clicked song index
     this.setState({
       currentVideo: this.state.videos[index]
     });
   }
 
-
-  // define click handler for search
-    // this should call searchYoutube with the input query from user
-  // pass this function to Nav!?
+  userSearch(query) {
+    this.setState({
+      options: {
+        query: query
+      }
+    });
+    this.props.searchYouTube(this.state.options, this.loadYouTubeData.bind(this));
+  }
 
   render() {
     return (
       <div>
-        <Nav searchYouTube={window.searchYouTube}/>
+        <Nav userSearch={this.userSearch.bind(this)}/>
         <div className="col-md-7"> 
           <VideoPlayer video={this.state.currentVideo} />
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.state.videos} onClick={this.onClick.bind(this)} />
+          <VideoList 
+            videos={this.state.videos} 
+            onClick={this.onClick.bind(this)} 
+          />
         </div>
       </div>
     );
