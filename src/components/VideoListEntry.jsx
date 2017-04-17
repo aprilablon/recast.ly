@@ -11,9 +11,12 @@ var VideoListEntry = (props) => (
       <div 
         onClick={props.onClick} 
         className="video-list-entry-title" 
-        id={props.video.etag}>{props.video.snippet.title}
+        id={props.video.etag}>
+        {props.video.snippet.title}
       </div>
-      <div className="video-list-entry-detail">{props.video.snippet.description}</div>
+      <div className="video-list-entry-detail">
+        {props.video.snippet.description}
+      </div>
     </div>
   </div>
 );

@@ -3,7 +3,7 @@ var Search = ({userSearch}) => (
     <input 
       className="form-control" 
       type="text" 
-      onChange={(e) => userSearch(e.target.value)}
+      onChange={(event) => userSearch(event.target.value)}
     />
     <button className="btn hidden-sm-down">
       <span className="glyphicon glyphicon-search"></span>

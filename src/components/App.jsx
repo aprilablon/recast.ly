@@ -46,7 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav userSearch={this.userSearch.bind(this)}/>
+        <Nav userSearch={this.userSearch.bind(this)} />
         <div className="col-md-7"> 
           <VideoPlayer video={this.state.currentVideo} />
         </div>
